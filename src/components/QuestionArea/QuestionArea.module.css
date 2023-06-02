@@ -1,0 +1,23 @@
+.questionContainer {
+  width: 90%;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 2px solid greenyellow;
+  border-radius: 12px;
+  margin: 20px auto;
+}
+
+.answerContainers {
+  width: 90%;
+}
+
+.questionContainer p {
+  font-size: 1.25rem; 
+  font-weight: 700;
+  text-align: center;
+}
+
+.nextBtn {
+  width: 75%;
+  text-align: center;
+}

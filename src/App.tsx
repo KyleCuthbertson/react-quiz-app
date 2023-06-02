@@ -1,13 +1,16 @@
-import './App.css'
 import { useState } from 'react'
+import { Button } from '@mui/material';
 import Title from './components/Title/Title'
 import StartArea from './components/StartArea/StartArea';
 import Header from './components/Header';
+import QuestionArea from './components/QuestionArea/QuestionArea';
+import styles from './App.module.css'
+
 
 
 function App() {
 
-  const [playing, setPlaying] = useState<boolean>();
+  const [playing, setPlaying] = useState<boolean>(false);
   const [finished, setFinished] = useState<boolean>(false);
   const [playerScore, setPlayerScore] = useState(0);
 
@@ -44,17 +47,21 @@ function App() {
     },
   ]
 
-
   return (
     <>
       {
-        !playing ?  
-        <>
+        !playing && !finished ?  
+        <div className={styles.startAreaContainer}>
           <Title/>
           <StartArea startGame={setPlaying}/> 
-        </>
+        </div>
         : 
+        <>
         <Header score={playerScore}/>
+        <div className={styles.questionAreaContainer}>
+          <QuestionArea questions={questions}/>
+        </div>
+        </>
       }
     </>
   )
