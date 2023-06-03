@@ -1,8 +1,12 @@
 export interface QuestionAreaProps {
+  success: boolean,
   questions: {
-    id: number,
+    category: string,
+    correct_answer: string,
+    difficulty: string,
+    incorrect_answers: string[],
     question: string,
-    correctAnswer: string,
-    incorrectAnswers: string[]
+    type: string,
+    id: number | undefined
   }[]
 }

@@ -1,23 +1,30 @@
-.questionContainer {
+.mainContainer {
   width: 90%;
   box-sizing: border-box;
   padding: 20px;
-  border: 2px solid greenyellow;
   border-radius: 12px;
   margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.answerContainers {
+.answersContainers {
   width: 90%;
 }
 
-.questionContainer p {
+.mainContainer p {
   font-size: 1.25rem; 
   font-weight: 700;
   text-align: center;
 }
 
+
+.btnContainer {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .nextBtn {
-  width: 75%;
-  text-align: center;
+  width: 100%;
 }
