@@ -28,6 +28,11 @@ const QuestionArea = (props: QuestionAreaProps) => {
     decodeURIComponent(question.correct_answer);
   })
 
+  const nextQuestion = () => {
+    window.scrollTo(0, 0);
+    setQuestionNumber(questionNumber + 1)
+  }
+
   return (
     <>      
       {
@@ -45,7 +50,7 @@ const QuestionArea = (props: QuestionAreaProps) => {
             }
           </div>
           <div className={styles.btnContainer}>
-            <Button className={styles.nextBtn} size='large' variant='contained' onClick={() => setQuestionNumber(questionNumber + 1)}>Next question</Button>
+            <Button className={styles.nextBtn} size='large' variant='contained' onClick={nextQuestion}>Next question</Button>
           </div>
         </div>
         :
