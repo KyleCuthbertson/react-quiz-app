@@ -37,7 +37,7 @@ const QuestionArea = (props: QuestionAreaProps) => {
           <div className={styles.questionContainer}>
             <p>{decodeURIComponent(question.question)}</p> 
           </div>
-          <div className={styles.answersContainer}>
+          <div className={styles.listAnswerContainer}>
             {
               question.incorrect_answers.map((answer: any) => (
                 <AnswerCard key={answer} answer={decodeURIComponent(answer)}/>
