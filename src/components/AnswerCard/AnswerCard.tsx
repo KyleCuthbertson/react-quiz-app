@@ -2,12 +2,23 @@ import styles from './AnswerCard.module.css';
 
 const AnswerCard = (props: any) => {
 
-  const { answer } = props;
+  const { answer, correctAnswer } = props;
+
+
+  const checkAnswer = () => {
+    if (answer === correctAnswer) {
+      console.log("Correct answer!");
+    }
+    else {
+      console.log("Incorrect!");
+    }
+  }
+  
 
   return (
-    <div className={styles.answerContainer}>
-      <p>{answer}</p>
-    </div>
+    <button onClick={checkAnswer} className={styles.answerContainer}>
+      {answer}
+    </button>
   )
 }
 

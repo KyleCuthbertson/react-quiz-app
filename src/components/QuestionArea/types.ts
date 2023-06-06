@@ -1,6 +1,4 @@
 export interface QuestionAreaProps {
-  success: boolean,
-  questions: {
     category: string,
     correct_answer: string,
     difficulty: string,
@@ -8,5 +6,4 @@ export interface QuestionAreaProps {
     question: string,
     type: string,
     id: number | undefined
-  }[]
 }
