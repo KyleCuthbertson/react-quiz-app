@@ -8,9 +8,9 @@ import { TailSpin } from 'react-loader-spinner';
 
 type QuestionAreaProps = {
   category: string,
-  correct_answer: string,
+  correctAnswer: string,
   difficulty: string,
-  incorrect_answers: string[],
+  incorrectAnswers: string[],
   question: string,
   type: string,
   id: number | undefined
@@ -26,7 +26,7 @@ const QuestionArea = () => {
 
 
   const fetchData = async () => {
-    let data = await axios('https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple&encode=url3986')
+    let data = await axios('https://the-trivia-api.com/v2/questions')
     return data;
   }
 
@@ -35,8 +35,9 @@ const QuestionArea = () => {
     queryKey: ["questions"], 
     queryFn: (() => fetchData()
     .then((res) => {
-      setQuestions(() => (res.data.results))
-      return res.data.results
+      setQuestions(res.data)
+      console.log(res.data)
+      return res.data
     })
     )
   })
@@ -61,21 +62,12 @@ const QuestionArea = () => {
   }
 
   if (questionsQuery.isSuccess) {
-    // Add id to each question from API
-    for (let i = 0; i < questions.length; i++) {
-      questions[i].id = i;
-    }
 
     // Add answers to array and randomise
     questions.forEach((question) => {
-      if (!question.incorrect_answers.includes(question.correct_answer)) {
-        question.incorrect_answers.push(question.correct_answer);
+      if (!question.incorrectAnswers.includes(question.correctAnswer)) {
+        question.incorrectAnswers.push(question.correctAnswer);
       }
-    })
-
-    // Decode answers
-    questions.forEach((question) => {
-      decodeURIComponent(question.correct_answer);
     })
   }
 
@@ -86,19 +78,19 @@ const QuestionArea = () => {
 
 
   return (
-    <>      
+    <>
       {
       questionsQuery.isSuccess ? 
       questions.map((question): any => (
         questionNumber === question.id ? 
         <div key={question.id} className={styles.mainContainer}>
           <div className={styles.questionContainer}>
-            <p>{decodeURIComponent(question.question)}</p> 
+            <p>{question.question}</p> 
           </div>
           <div className={styles.listAnswerContainer}>
             {
-              question.incorrect_answers.map((answer: any) => (
-                <AnswerCard key={answer} correctAnswer={question.correct_answer} answer={decodeURIComponent(answer)}/>
+              question.incorrectAnswers.map((answer: any) => (
+                <AnswerCard key={answer} correctAnswer={question.correctAnswer} answer={answer}/>
               ))
             }
           </div>
@@ -109,7 +101,8 @@ const QuestionArea = () => {
         :
         null
       ))
-      : null
+      : 
+      null
     }
   </>
   )
