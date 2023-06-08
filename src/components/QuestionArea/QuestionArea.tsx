@@ -25,9 +25,6 @@ const QuestionArea = () => {
   const [questionNumber, setQuestionNumber] = useState<number>(1);
   const [questions, setQuestions] = useState<QuestionAreaProps>([]);
 
-    // Access the client
-    // const queryClient = useQueryClient()
-
 
   const fetchData = async () => {
     let data = await axios('https://the-trivia-api.com/v2/questions')
@@ -40,7 +37,6 @@ const QuestionArea = () => {
     queryFn: (() => fetchData()
     .then((res) => {
       setQuestions(res.data)
-      console.log(res.data)
       return res.data
     })
     )
