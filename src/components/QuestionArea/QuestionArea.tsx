@@ -13,7 +13,9 @@ type QuestionAreaProps = {
   id: string,
   incorrectAnswers: string[],
   isNiche: boolean,
-  question: string,
+  question: {
+    text: string
+  },
   type: string,
   questionNumber: number
 }[]
