@@ -10,15 +10,17 @@ type QuestionAreaProps = {
   category: string,
   correctAnswer: string,
   difficulty: string,
+  id: string,
   incorrectAnswers: string[],
+  isNiche: boolean,
   question: string,
   type: string,
-  id: number | undefined
+  questionNumber: number
 }[]
 
 const QuestionArea = () => {
 
-  const [questionNumber, setQuestionNumber] = useState<number>(0);
+  const [questionNumber, setQuestionNumber] = useState<number>(1);
   const [questions, setQuestions] = useState<QuestionAreaProps>([]);
 
     // Access the client
@@ -69,6 +71,11 @@ const QuestionArea = () => {
         question.incorrectAnswers.push(question.correctAnswer);
       }
     })
+
+    // Add question number property
+    for (let i = 0; i < 10; i++ ) {
+      questions[i].questionNumber = i + 1;
+    }
   }
 
   const nextQuestion = () => {
@@ -82,10 +89,10 @@ const QuestionArea = () => {
       {
       questionsQuery.isSuccess ? 
       questions.map((question): any => (
-        questionNumber === question.id ? 
+        question.questionNumber === questionNumber ? 
         <div key={question.id} className={styles.mainContainer}>
           <div className={styles.questionContainer}>
-            <p>{question.question}</p> 
+            <p>{question.question.text}</p> 
           </div>
           <div className={styles.listAnswerContainer}>
             {
