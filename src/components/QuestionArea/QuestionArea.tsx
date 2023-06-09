@@ -1,12 +1,13 @@
 import { Button } from '@mui/material';
 import styles from './QuestionArea.module.css';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import axios from 'axios';
 import AnswerCard from '../AnswerCard/AnswerCard';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { TailSpin } from 'react-loader-spinner';
 
 interface questionAreaProps {
+  setPlayerScore: Dispatch<SetStateAction<number>>,
   playerScore: number
 }
 
@@ -24,7 +25,7 @@ type questionsProps = {
   questionNumber: number
 }[]
 
-const QuestionArea = ({ playerScore }: questionAreaProps) => {
+const QuestionArea = ({ setPlayerScore, playerScore }: questionAreaProps) => {
 
   const [questionNumber, setQuestionNumber] = useState<number>(9);
   const [questions, setQuestions] = useState<questionsProps>([]);
@@ -99,7 +100,7 @@ const QuestionArea = ({ playerScore }: questionAreaProps) => {
           <div className={styles.listAnswerContainer}>
             {
               question.incorrectAnswers.map((answer: any) => (
-                <AnswerCard key={answer} correctAnswer={question.correctAnswer} answer={answer}/>
+                <AnswerCard key={answer} setPlayerScore={setPlayerScore} playerScore={playerScore} correctAnswer={question.correctAnswer} answer={answer}/>
               ))
             }
           </div>

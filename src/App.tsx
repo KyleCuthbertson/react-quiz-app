@@ -27,7 +27,7 @@ function App() {
         <>
           <Header score={playerScore}/>
           <div className={styles.questionAreaContainer}>
-            <QuestionArea playerScore={playerScore}/>
+            <QuestionArea setPlayerScore={setPlayerScore} playerScore={playerScore}/>
           </div>
         </>
       }
