@@ -1,12 +1,16 @@
 import { Button } from '@mui/material';
 import styles from './QuestionArea.module.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import AnswerCard from '../AnswerCard/AnswerCard';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { TailSpin } from 'react-loader-spinner';
 
-type QuestionAreaProps = {
+interface questionAreaProps {
+  playerScore: number
+}
+
+type questionsProps = {
   category: string,
   correctAnswer: string,
   difficulty: string,
@@ -20,10 +24,10 @@ type QuestionAreaProps = {
   questionNumber: number
 }[]
 
-const QuestionArea = () => {
+const QuestionArea = ({ playerScore }: questionAreaProps) => {
 
-  const [questionNumber, setQuestionNumber] = useState<number>(1);
-  const [questions, setQuestions] = useState<QuestionAreaProps>([]);
+  const [questionNumber, setQuestionNumber] = useState<number>(9);
+  const [questions, setQuestions] = useState<questionsProps>([]);
 
 
   const fetchData = async () => {
@@ -85,7 +89,7 @@ const QuestionArea = () => {
   return (
     <>
       {
-      questionsQuery.isSuccess ? 
+      questionsQuery.isSuccess && questionNumber < 11 ? 
       questions.map((question): any => (
         question.questionNumber === questionNumber ? 
         <div key={question.id} className={styles.mainContainer}>
@@ -106,8 +110,11 @@ const QuestionArea = () => {
         :
         null
       ))
-      : 
-      null
+      :
+      <div className={styles.finishedContainer}>
+        <h2>Quiz finished!</h2>
+        <h2>Your final score: {playerScore}/10</h2>
+      </div>
     }
   </>
   )

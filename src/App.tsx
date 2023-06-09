@@ -12,7 +12,7 @@ function App() {
 
   const [playing, setPlaying] = useState<boolean>(false);
   const [finished, setFinished] = useState<boolean>(false);
-  const [playerScore, setPlayerScore] = useState(0);
+  const [playerScore, setPlayerScore] = useState<number>(0);
 
 
   return (
@@ -27,7 +27,7 @@ function App() {
         <>
           <Header score={playerScore}/>
           <div className={styles.questionAreaContainer}>
-            <QuestionArea/>
+            <QuestionArea playerScore={playerScore}/>
           </div>
         </>
       }
