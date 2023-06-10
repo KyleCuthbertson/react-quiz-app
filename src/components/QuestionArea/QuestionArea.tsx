@@ -27,7 +27,7 @@ type questionsProps = {
 
 const QuestionArea = ({ setPlayerScore, playerScore }: questionAreaProps) => {
 
-  const [questionNumber, setQuestionNumber] = useState<number>(9);
+  const [questionNumber, setQuestionNumber] = useState<number>(1);
   const [questions, setQuestions] = useState<questionsProps>([]);
 
 
